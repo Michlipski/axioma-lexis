@@ -1,0 +1,18 @@
+[
+  {
+    "word": "zuhandenheit",
+    "definition": "The ontological mode of equipment when it functions smoothly as a transparent extension of human intent.",
+    "ipa": "/tsu\u02d0\u02c8handn\u0329ha\u026at/",
+    "context_sentence": "When a tool achieves Zuhandenheit, the artisan's attention flows through it directly into the work.",
+    "domain": "Ontology",
+    "etymology_hint": "German: zu (at) + Hand (hand) = literally 'at-hand'.",
+    "card_id": "seed-zuhandenheit",
+    "tier": 0,
+    "created_at": 1728777600.0,
+    "due_timestamp": 0.0,
+    "last_reviewed": null,
+    "review_count": 0,
+    "consecutive_correct": 0,
+    "history": []
+  }
+]

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Axioma Lexis</string>
+    <string name="shortcut_capture">Quick Capture</string>
+    <string name="shortcut_review">Micro Review</string>
+</resources>

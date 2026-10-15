@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Axioma Lexis G2 · Spaced Repetition & Lexicon</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/svg+xml" href="/icon.svg">
+  <link rel="apple-touch-icon" href="/icon.svg">
+  <meta name="theme-color" content="#0a0d14">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <style>
+    :root {
+      --background: #0a0d14;
+      --foreground: #f8fafc;
+      --card: #131722;
+      --border: #232936;
+      --muted-foreground: #94a3b8;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background-color: var(--background);
+      color: var(--foreground);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 12px;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .hidden { display: none !important; }
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .flex-1 { flex: 1; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+    .grid { display: grid; }
+    .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .gap-1 { gap: 4px; }
+    .gap-1\.5 { gap: 6px; }
+    .gap-2 { gap: 8px; }
+    .gap-3 { gap: 12px; }
+    .gap-4 { gap: 16px; }
+    .space-y-1 > * + * { margin-top: 4px; }
+    .space-y-2 > * + * { margin-top: 8px; }
+    .space-y-2\.5 > * + * { margin-top: 10px; }
+    .space-y-3 > * + * { margin-top: 12px; }
+    .space-y-4 > * + * { margin-top: 16px; }
+    .max-w-md { max-width: 448px; width: 100%; margin-left: auto; margin-right: auto; }
+    .font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .font-bold { font-weight: 700; }
+    .font-extrabold { font-weight: 800; }
+    .font-semibold { font-weight: 600; }
+    .font-medium { font-weight: 500; }
+    .text-center { text-align: center; }
+    .text-xs { font-size: 12px; line-height: 16px; }
+    .text-sm { font-size: 14px; line-height: 20px; }
+    .text-base { font-size: 16px; line-height: 24px; }
+    .text-lg { font-size: 18px; line-height: 28px; }
+    .text-xl { font-size: 20px; line-height: 28px; }
+    .text-3xl { font-size: 28px; line-height: 34px; }
+    .text-\[10px\] { font-size: 10px; line-height: 14px; }
+    .text-\[11px\] { font-size: 11px; line-height: 15px; }
+    .rounded-xl { border-radius: 12px; }
+    .rounded-2xl { border-radius: 16px; }
+    .rounded-t-2xl { border-top-left-radius: 16px; border-top-right-radius: 16px; }
+    .rounded-full { border-radius: 9999px; }
+    .rounded-lg { border-radius: 8px; }
+    .border { border-width: 1px; border-style: solid; border-color: var(--border); }
+    .border-b { border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: var(--border); }
+    .border-t { border-top-width: 1px; border-top-style: solid; border-top-color: var(--border); }
+    .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25); }
+    .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4); }
+    .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.6); }
+    .transition-all { transition-property: all; transition-duration: 200ms; }
+    .card-transition { transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease; }
+    .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .select-none { user-select: none; -webkit-user-select: none; }
+    .relative { position: relative; }
+    .absolute { position: absolute; }
+    .fixed { position: fixed; }
+    .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+    .z-50 { z-index: 50; }
+    .bg-black\/70 { background-color: rgba(0, 0, 0, 0.75); }
+    .backdrop-blur-sm { backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+    .resize-none { resize: none; }
+    .overflow-hidden { overflow: hidden; }
+    .overflow-y-auto { overflow-y: auto; }
+    .overflow-x-auto { overflow-x: auto; }
+    .max-h-\[90vh\] { max-height: 90vh; }
+    .min-h-\[310px\] { min-height: 310px; }
+    .min-w-0 { min-width: 0px; }
+    .capitalize { text-transform: capitalize; }
+    .uppercase { text-transform: uppercase; }
+    .italic { font-style: italic; }
+    .underline { text-decoration-line: underline; }
+    .p-0\.5 { padding: 2px; }
+    .p-1 { padding: 4px; }
+    .p-2 { padding: 8px; }
+    .p-2\.5 { padding: 10px; }
+    .p-3 { padding: 12px; }
+    .p-4 { padding: 16px; }
+    .p-5 { padding: 20px; }
+    .p-6 { padding: 24px; }
+    .px-1 { padding-left: 4px; padding-right: 4px; }
+    .px-2 { padding-left: 8px; padding-right: 8px; }
+    .px-2\.5 { padding-left: 10px; padding-right: 10px; }
+    .px-3 { padding-left: 12px; padding-right: 12px; }
+    .px-3\.5 { padding-left: 14px; padding-right: 14px; }
+    .px-4 { padding-left: 16px; padding-right: 16px; }
+    .py-0\.5 { padding-top: 2px; padding-bottom: 2px; }
+    .py-1 { padding-top: 4px; padding-bottom: 4px; }
+    .py-1\.5 { padding-top: 6px; padding-bottom: 6px; }
+    .py-2 { padding-top: 8px; padding-bottom: 8px; }
+    .py-2\.5 { padding-top: 10px; padding-bottom: 10px; }
+    .py-3 { padding-top: 12px; padding-bottom: 12px; }
+    .py-4 { padding-top: 16px; padding-bottom: 16px; }
+    .pb-1 { padding-bottom: 4px; }
+    .pb-3 { padding-bottom: 12px; }
+    .pt-1 { padding-top: 4px; }
+    .pt-2 { padding-top: 8px; }
+    .pt-3 { padding-top: 12px; }
+    .my-auto { margin-top: auto; margin-bottom: auto; }
+    .my-2 { margin-top: 8px; margin-bottom: 8px; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .mt-1 { margin-top: 4px; }
+    .mt-2 { margin-top: 8px; }
+    .mt-3 { margin-top: 12px; }
+    .mb-0\.5 { margin-bottom: 2px; }
+    .mb-1 { margin-bottom: 4px; }
+    .block { display: block; }
+    .w-full { width: 100%; }
+    .w-2\.5 { width: 10px; }
+    .h-2\.5 { height: 10px; }
+    .w-12 { width: 48px; }
+    .h-12 { height: 48px; }
+    .h-1 { height: 4px; }
+    .h-full { height: 100%; }
+    .bottom-0 { bottom: 0; }
+    .left-0 { left: 0; }
+    .right-0 { right: 0; }
+    .leading-relaxed { line-height: 1.625; }
+    .tracking-tight { letter-spacing: -0.025em; }
+    .tracking-wider { letter-spacing: 0.05em; }
+    .cursor-pointer { cursor: pointer; }
+
+    /* Colors */
+    .bg-\[var\(--background\)\] { background-color: var(--background); }
+    .text-\[var\(--foreground\)\] { color: var(--foreground); }
+    .bg-\[var\(--card\)\] { background-color: var(--card); }
+    .border-\[var\(--border\)\] { border-color: var(--border); }
+    .text-\[var\(--muted-foreground\)\] { color: var(--muted-foreground); }
+    .placeholder-\[var\(--muted-foreground\)\]::placeholder { color: var(--muted-foreground); }
+    
+    .bg-indigo-600 { background-color: #4f46e5; }
+    .bg-indigo-500 { background-color: #6366f1; }
+    .text-indigo-400 { color: #818cf8; }
+    .text-indigo-300 { color: #a5b4fc; }
+    .bg-indigo-950\/20 { background-color: rgba(30, 27, 75, 0.4); }
+    .bg-indigo-950\/60 { background-color: rgba(30, 27, 75, 0.7); }
+    .border-indigo-500 { border-color: #6366f1; }
+    .border-indigo-500\/40 { border-color: rgba(99, 102, 241, 0.4); }
+    .border-indigo-800 { border-color: #3730a3; }
+    
+    .bg-emerald-500 { background-color: #10b981; }
+    .bg-emerald-600 { background-color: #059669; }
+    .bg-emerald-950 { background-color: #022c22; }
+    .bg-emerald-950\/80 { background-color: rgba(2, 44, 34, 0.85); }
+    .text-emerald-300 { color: #6ee7b7; }
+    .text-emerald-400 { color: #34d399; }
+    .border-emerald-800 { border-color: #065f46; }
+
+    .text-rose-400 { color: #fb7185; }
+    .border-rose-800 { border-color: #9f1239; }
+
+    .bg-amber-500 { background-color: #f59e0b; }
+    .bg-amber-950\/40 { background-color: rgba(69, 26, 3, 0.5); }
+    .border-amber-800\/80 { border-color: rgba(146, 64, 14, 0.8); }
+    .text-amber-200 { color: #fde68a; }
+    .text-amber-300 { color: #fcd34d; }
+    .text-amber-400 { color: #fbbf24; }
+
+    .text-white { color: #ffffff; }
+
+    /* Universal Button & Form Control Reset */
+    button, input[type="button"], input[type="submit"], input[type="reset"] {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background: transparent;
+      border: none;
+      color: inherit;
+      font-family: inherit;
+      font-size: inherit;
+      cursor: pointer;
+      outline: none;
+      user-select: none;
+      -webkit-user-select: none;
+      margin: 0;
+      padding: 0;
+    }
+    input, textarea, select {
+      outline: none;
+      font-family: inherit;
+    }
+    button:active { transform: scale(0.97); }
+
+    /* Tactile Dark-Theme Button System */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      border-radius: 12px;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+    .btn:active {
+      transform: scale(0.97);
+    }
+    .btn-primary {
+      background-color: #4f46e5 !important;
+      color: #ffffff !important;
+      border-color: #6366f1 !important;
+      box-shadow: 0 1px 3px rgba(79, 70, 229, 0.4);
+    }
+    .btn-primary:hover {
+      background-color: #4338ca !important;
+    }
+    .btn-success {
+      background-color: #059669 !important;
+      color: #ffffff !important;
+      border-color: #10b981 !important;
+      box-shadow: 0 1px 3px rgba(5, 150, 105, 0.4);
+    }
+    .btn-success:hover {
+      background-color: #047857 !important;
+    }
+    .btn-secondary {
+      background-color: #131722 !important;
+      color: #f8fafc !important;
+      border: 1px solid #232936 !important;
+    }
+    .btn-secondary:hover {
+      border-color: #3b4252 !important;
+      background-color: #181d2a !important;
+    }
+    .btn-review-needed {
+      background-color: #181726 !important;
+      color: #f8fafc !important;
+      border: 1px solid #3b2839 !important;
+    }
+    .btn-review-needed:hover {
+      border-color: #9f1239 !important;
+    }
+    .btn-amber {
+      background-color: rgba(245, 158, 11, 0.12) !important;
+      color: #fcd34d !important;
+      border: 1px solid rgba(245, 158, 11, 0.35) !important;
+    }
+    .btn-amber:hover {
+      background-color: rgba(245, 158, 11, 0.22) !important;
+    }
+    .btn-danger {
+      background-color: rgba(225, 29, 72, 0.12) !important;
+      color: #fda4af !important;
+      border: 1px solid rgba(225, 29, 72, 0.35) !important;
+    }
+    .btn-danger:hover {
+      background-color: rgba(225, 29, 72, 0.24) !important;
+    }
+    .btn-ghost {
+      background: transparent !important;
+      border: 1px solid transparent !important;
+      color: #94a3b8 !important;
+    }
+    .btn-ghost:hover {
+      color: #ffffff !important;
+    }
+    .tab-btn {
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      font-weight: 500;
+      color: #94a3b8 !important;
+      background: transparent !important;
+      border: 1px solid transparent !important;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .tab-btn:hover {
+      color: #ffffff !important;
+    }
+    .tab-btn.active-review {
+      color: #34d399 !important;
+      background-color: rgba(2, 44, 34, 0.85) !important;
+      border: 1px solid #065f46 !important;
+      font-weight: 700 !important;
+    }
+    .tab-btn.active-lexicon {
+      color: #a5b4fc !important;
+      background-color: rgba(30, 27, 75, 0.8) !important;
+      border: 1px solid #3730a3 !important;
+      font-weight: 700 !important;
+    }
+    .filter-pill {
+      background-color: #131722 !important;
+      border: 1px solid #232936 !important;
+      color: #94a3b8 !important;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .filter-pill:hover {
+      color: #ffffff !important;
+      border-color: #3b4252 !important;
+    }
+    .filter-pill.active {
+      background-color: rgba(30, 27, 75, 0.8) !important;
+      border-color: #6366f1 !important;
+      color: #a5b4fc !important;
+      font-weight: 700 !important;
+      box-shadow: 0 0 8px rgba(99, 102, 241, 0.25);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .4; }
+    }
+    .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+  </style>
+</head>
+<body class="bg-[var(--background)] text-[var(--foreground)] antialiased min-h-screen flex flex-col justify-between p-3 select-none">
+
+  <!-- Main Container -->
+  <div class="max-w-md w-full mx-auto flex flex-col flex-1 justify-between gap-3">
+
+    <!-- Header Navigation & View Switcher -->
+    <header class="space-y-2.5 pt-1">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="font-bold tracking-tight text-sm font-mono uppercase">Axioma Lexis</span>
+        </div>
+        <!-- Dual Mode Navigation Switcher -->
+        <div class="flex items-center p-0.5 rounded-xl border border-[var(--border)] bg-[var(--card)] text-xs font-mono font-medium">
+          <button id="tab-review" class="tab-btn active-review">
+            🎯 Review
+          </button>
+          <button id="tab-lexicon" class="tab-btn">
+            📚 Lexicon (<span id="lexicon-count">1</span>)
+          </button>
+        </div>
+      </div>
+
+      <!-- 1-Tap Single Word Capture Input -->
+      <form id="capture-form" class="flex items-center gap-2">
+        <div class="relative flex-1">
+          <input 
+            type="text" 
+            id="new-word-input" 
+            placeholder="Type or paste 1 word to capture..." 
+            class="w-full bg-[var(--card)] border border-[var(--border)] rounded-xl px-3 py-2 text-xs text-[var(--foreground)] placeholder-[var(--muted-foreground)] font-medium shadow-sm"
+          />
+        </div>
+        <button 
+          type="submit" 
+          class="btn btn-primary text-xs px-3.5 py-2 shadow-sm flex items-center gap-1"
+        >
+          <span>+</span> Hydrate
+        </button>
+      </form>
+      <div id="capture-feedback" class="text-[11px] font-mono text-emerald-400 hidden px-1"></div>
+    </header>
+
+    <!-- Workspace Viewports (Review vs. Lexicon) -->
+    <main class="flex-1 flex flex-col justify-center my-auto relative">
+
+      <!-- VIEW 1: ACTIVE REVIEW MODE -->
+      <div id="view-review" class="space-y-3">
+        
+        <!-- Active Review Card View -->
+        <div id="card-view" class="space-y-3">
+          <div id="flashcard" class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-md card-transition relative overflow-hidden flex flex-col justify-between min-h-[310px]">
+            
+            <!-- Card Header & Metadata -->
+            <div class="flex items-center justify-between text-xs">
+              <span id="card-domain" class="font-mono text-[10px] px-2 py-0.5 rounded bg-[var(--background)] border border-[var(--border)] text-indigo-400 font-semibold tracking-wider uppercase">
+                Domain
+              </span>
+              <div class="flex items-center gap-2">
+                <span id="card-tier" class="font-mono text-[11px] text-[var(--muted-foreground)] font-medium">
+                  Tier 0: New
+                </span>
+                <button id="btn-quick-edit" title="Edit this card" class="btn-ghost text-xs px-1 font-mono">
+                  ✏️
+                </button>
+              </div>
+            </div>
+
+            <!-- Target Word & Pronunciation -->
+            <div class="my-auto py-3 space-y-2 text-center">
+              <h1 id="card-word" class="text-3xl font-extrabold tracking-tight text-[var(--foreground)] capitalize">
+                zuhandenheit
+              </h1>
+              <p id="card-ipa" class="text-sm font-mono text-indigo-400 font-medium">
+                /tsuːˈhandn̩haɪt/
+              </p>
+            </div>
+
+            <!-- Active Recall Tap-to-Reveal Prompt (Definition Hidden Initially) -->
+            <div id="reveal-prompt" class="cursor-pointer my-2 py-4 px-4 rounded-xl border border-dashed border-indigo-500/40 bg-indigo-950/20 text-center transition-all select-none">
+              <div class="text-xs font-mono font-semibold text-indigo-300 flex items-center justify-center gap-1.5">
+                <span>👆</span> <span>Tap card to reveal definition & context</span>
+              </div>
+              <div class="text-[10px] text-[var(--muted-foreground)] mt-1 font-mono">
+                Active recall mode · Attempt mental retrieval first (or press Space)
+              </div>
+            </div>
+
+            <!-- Definition, Context Sentence & Mnemonic (Revealed on Tap) -->
+            <div id="card-details" class="hidden space-y-2.5 pt-3 border-t border-[var(--border)]">
+              <div>
+                <span class="text-[10px] font-mono font-semibold text-indigo-400 uppercase tracking-wider block mb-0.5">Definition</span>
+                <p id="card-definition" class="text-xs text-[var(--foreground)] leading-relaxed font-medium">
+                  The ontological mode of equipment when it functions smoothly as a transparent extension of human intent.
+                </p>
+              </div>
+              <div id="card-context-wrapper">
+                <span class="text-[10px] font-mono font-semibold text-[var(--muted-foreground)] uppercase tracking-wider block mb-0.5">Context Sentence</span>
+                <p id="card-sentence" class="text-xs text-[var(--muted-foreground)] italic leading-relaxed">
+                  "When a tool achieves Zuhandenheit, the artisan's attention flows through it directly into the work."
+                </p>
+              </div>
+              <div id="card-mnemonic-wrapper" class="p-2.5 rounded-xl bg-amber-950/30 border border-amber-800/60 text-[11px] text-amber-300 font-mono space-y-1">
+                <div class="flex items-center gap-1.5 font-bold text-[10px] uppercase tracking-wider text-amber-400">
+                  <span>💡</span> <span>Mnemonic / Etymology:</span>
+                </div>
+                <p id="card-mnemonic-detail" class="text-[11px] text-amber-200 leading-snug">
+                  German: zu (at) + Hand (hand) = literally 'at-hand'.
+                </p>
+              </div>
+            </div>
+
+            <!-- Subtle 10s Dwell Patience Hint Box (Revealed after 10s hesitation) -->
+            <div id="dwell-hint-box" class="hidden mt-3 p-2.5 rounded-xl bg-amber-950/40 border border-amber-800/80 text-[11px] text-amber-300 font-mono space-y-1">
+              <div class="flex items-center gap-1.5 font-bold">
+                <span>💡</span> <span>Mnemonic / Etymology Hint:</span>
+              </div>
+              <p id="card-hint" class="text-[10px] text-amber-200">
+                German: zu (at) + Hand (hand) = literally 'at-hand'.
+              </p>
+            </div>
+
+            <!-- 10s Dwell Patience Progress Line -->
+            <div class="absolute bottom-0 left-0 right-0 h-1 bg-[var(--background)] overflow-hidden">
+              <div id="dwell-timer-bar" class="h-full bg-indigo-500 transition-all duration-300" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <!-- Touch Controls & Swipe Bar -->
+          <div class="grid grid-cols-2 gap-3 pt-1">
+            <button 
+              id="btn-review" 
+              class="btn btn-review-needed py-3 px-4 text-xs font-semibold flex items-center justify-center gap-1.5 shadow-sm"
+            >
+              <span class="text-base text-rose-400">&larr;</span> Review Needed
+            </button>
+            <button 
+              id="btn-mastered" 
+              class="btn btn-success py-3 px-4 text-xs font-semibold flex items-center justify-center gap-1.5 shadow-sm"
+            >
+              Mastered <span class="text-base">&rarr;</span>
+            </button>
+          </div>
+
+          <!-- 1-Tap Undo Bar (Functorial Reversibility) -->
+          <div class="flex items-center justify-between text-[11px] text-[var(--muted-foreground)] px-1">
+            <span id="session-counter" class="font-mono text-[10px] text-emerald-400 font-semibold">Card 1 of 1</span>
+            <button id="btn-undo" class="btn-ghost text-indigo-400 font-mono text-[11px] font-medium underline flex items-center gap-1">
+              <span>↺</span> Undo Last (Cmd+Z)
+            </button>
+          </div>
+        </div>
+
+        <!-- Completion View (Shown after micro-session) -->
+        <div id="completion-view" class="hidden bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 text-center space-y-4 shadow-md">
+          <div class="w-12 h-12 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded-full flex items-center justify-center mx-auto text-xl">
+            ✓
+          </div>
+          <div class="space-y-1">
+            <h2 class="text-lg font-bold text-[var(--foreground)]">Micro-Session Complete!</h2>
+            <p id="completion-stats" class="text-xs text-[var(--muted-foreground)]">1 word reviewed in 8 seconds.</p>
+          </div>
+          <div class="p-3 bg-[var(--background)] border border-[var(--border)] rounded-xl text-xs font-mono text-[var(--muted-foreground)] space-y-1 text-left">
+            <div class="flex justify-between"><span>Activation Overhead:</span> <strong class="text-emerald-400 font-bold">0 seconds</strong></div>
+            <div class="flex justify-between"><span>Decay Rules:</span> <strong class="text-[var(--foreground)] font-bold">1-Tier Step-Back</strong></div>
+            <div class="flex justify-between"><span>Next Window:</span> <strong id="next-window-time" class="text-indigo-400 font-bold">Evening (19:30)</strong></div>
+          </div>
+          <div class="space-y-2">
+            <div class="grid grid-cols-2 gap-2">
+              <button 
+                id="btn-next-batch" 
+                class="btn btn-primary py-2.5 text-xs font-semibold"
+              >
+                Done for Now
+              </button>
+              <button 
+                id="btn-open-lexicon-from-completion" 
+                class="btn btn-secondary py-2.5 text-xs font-semibold"
+              >
+                Browse Lexicon
+              </button>
+            </div>
+            <button 
+              id="btn-practice-ahead-completion" 
+              class="btn btn-amber w-full py-2 text-[11px] font-mono font-semibold hidden"
+            >
+              ⚡ Practice Ahead (Early Review)
+            </button>
+          </div>
+        </div>
+
+        <!-- Caught-Up View (Shown when 0 cards are currently due) -->
+        <div id="caught-up-view" class="hidden bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 text-center space-y-4 shadow-md">
+          <div class="w-12 h-12 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded-full flex items-center justify-center mx-auto text-xl">
+            ✦
+          </div>
+          <div class="space-y-1">
+            <h2 class="text-base font-bold text-[var(--foreground)]">All Caught Up!</h2>
+            <p id="caught-up-details" class="text-xs text-[var(--muted-foreground)]">0 cards due right now. Next review is scheduled.</p>
+          </div>
+          <div class="p-3 bg-[var(--background)] border border-[var(--border)] rounded-xl text-xs font-mono text-[var(--muted-foreground)] space-y-1 text-left">
+            <div class="flex justify-between"><span>Retained Mastery:</span> <strong id="caught-up-tier-stat" class="text-emerald-400 font-bold">Tier 1 (+1 Day)</strong></div>
+            <div class="flex justify-between"><span>Next Review Window:</span> <strong id="caught-up-window" class="text-indigo-400 font-bold">Tomorrow (08:30)</strong></div>
+          </div>
+          <div class="space-y-2">
+            <div class="grid grid-cols-2 gap-2">
+              <button 
+                id="btn-cram-early" 
+                class="btn btn-amber py-2.5 text-xs font-semibold flex items-center justify-center gap-1"
+              >
+                <span>⚡</span> Practice Ahead
+              </button>
+              <button 
+                id="btn-open-lexicon-from-caughtup" 
+                class="btn btn-primary py-2.5 text-xs font-semibold"
+              >
+                Browse Lexicon
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VIEW 2: LEXICON DECK BROWSER & SEARCH -->
+      <div id="view-lexicon" class="hidden flex-1 flex flex-col space-y-3">
+        
+        <!-- Search and Filter Pills -->
+        <div class="space-y-2">
+          <div class="relative">
+            <input 
+              type="text" 
+              id="lexicon-search" 
+              placeholder="Filter words, roots, definitions..." 
+              class="w-full bg-[var(--card)] border border-[var(--border)] rounded-xl px-3 py-2 text-xs text-[var(--foreground)] placeholder-[var(--muted-foreground)] font-medium shadow-sm"
+            />
+          </div>
+
+          <!-- Tier Filter Pills -->
+          <div class="flex items-center gap-1.5 overflow-x-auto text-[10px] font-mono pb-1">
+            <button class="filter-pill active" data-filter="all">
+              All (<span id="filter-all-count">0</span>)
+            </button>
+            <button class="filter-pill" data-filter="new">
+              New T0 (<span id="filter-new-count">0</span>)
+            </button>
+            <button class="filter-pill" data-filter="learning">
+              Active T1-3 (<span id="filter-learning-count">0</span>)
+            </button>
+            <button class="filter-pill" data-filter="mastered">
+              Retained T4-6 (<span id="filter-mastered-count">0</span>)
+            </button>
+          </div>
+        </div>
+
+        <!-- Scrollable Lexicon List -->
+        <div id="lexicon-list" class="space-y-2 overflow-y-auto max-h-[50vh] pr-1">
+          <!-- Dynamically populated card items -->
+        </div>
+
+        <!-- Notification Test Utility -->
+        <div class="pt-2 border-t border-[var(--border)]">
+          <div class="p-2.5 rounded-xl border border-dashed border-indigo-500/40 bg-indigo-950/20 space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-mono font-semibold text-indigo-300 flex items-center gap-1.5">
+                <span>🔔</span> Test Background Notification
+              </span>
+              <span class="text-[9px] font-mono text-[var(--muted-foreground)]">AlarmManager</span>
+            </div>
+            <p class="text-[10px] text-[var(--muted-foreground)] leading-relaxed">
+              Schedules a practice alert 10 seconds from now. Tap below, then immediately swipe away the app or lock your screen to test background wakeup.
+            </p>
+            <button 
+              type="button" 
+              id="btn-test-notification" 
+              class="w-full py-2 px-3 rounded-lg bg-indigo-600/80 hover:bg-indigo-600 active:scale-[0.98] text-white text-xs font-medium font-mono transition-all flex items-center justify-center gap-2 shadow-sm"
+            >
+              <span>⏱️</span> Schedule Test Alert (10s Grace)
+            </button>
+            <div id="test-notif-status" class="hidden text-center text-[10px] font-mono font-bold text-amber-300"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- Footer Telemetry & APK Download -->
+    <footer class="pt-2 border-t border-[var(--border)]">
+      <div class="flex items-center justify-between text-[10px] font-mono text-[var(--muted-foreground)] px-1">
+        <span>Axioma Lexis · v2.0</span>
+        <a href="/download" class="text-indigo-400 underline font-semibold flex items-center gap-1">⬇ Android APK</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- SLIDE-UP CARD EDITOR MODAL -->
+  <div id="edit-modal" class="hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/70 backdrop-blur-sm">
+    <div class="w-full max-w-md bg-[var(--card)] border border-[var(--border)] rounded-t-2xl sm:rounded-2xl p-5 space-y-3.5 shadow-xl max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between border-b border-[var(--border)] pb-2.5">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-mono font-bold uppercase text-indigo-400">Edit Vocabulary Term</span>
+        </div>
+        <button id="btn-close-edit" class="btn-ghost text-sm font-bold p-1">✕</button>
+      </div>
+
+      <form id="edit-form" class="space-y-3">
+        <input type="hidden" id="edit-card-id" />
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label class="block text-[10px] font-mono text-[var(--muted-foreground)] uppercase">Target Word</label>
+              <button type="button" id="btn-modal-autofill" class="btn-ghost text-[10px] font-mono text-indigo-400 hover:text-indigo-300 underline font-semibold flex items-center gap-0.5">
+                ✨ Auto-Fill Definition
+              </button>
+            </div>
+            <input type="text" id="edit-word" class="w-full bg-[var(--background)] border border-[var(--border)] rounded-xl px-2.5 py-1.5 text-xs text-[var(--foreground)] font-bold capitalize" required />
+          </div>
+          <div>
+            <label class="block text-[10px] font-mono text-[var(--muted-foreground)] uppercase mb-1">Pronunciation (IPA)</label>
+            <input type="text" id="edit-ipa" class="w-full bg-[var(--background)] border border-[var(--border)] rounded-xl px-2.5 py-1.5 text-xs text-indigo-300 font-mono" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-[10px] font-mono text-[var(--muted-foreground)] uppercase mb-1">Domain</label>
+            <input type="text" id="edit-domain" class="w-full bg-[var(--background)] border border-[var(--border)] rounded-xl px-2.5 py-1.5 text-xs text-[var(--foreground)]" />
+          </div>
+          <div>
+            <label class="block text-[10px] font-mono text-[var(--muted-foreground)] uppercase mb-1">Mastery Tier</label>
+            <select id="edit-tier" class="w-full bg-[var(--background)] border border-[var(--border)] rounded-xl px-2 py-1.5 text-xs text-[var(--foreground)] font-mono">
+              <option value="0">Tier 0: New (+4h)</option>
+              <option value="1">Tier 1: Next Day (+1d)</option>
+              <option value="2">Tier 2: Short (+3d)</option>
+              <option value="3">Tier 3: Medium (+7d)</option>
+              <option value="4">Tier 4: Expanding (+16d)</option>
+              <option value="5">Tier 5: Deep (+35d)</option>
+              <option value="6">Tier 6: Retained (+90d)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-mono text-[var(--muted-foreground)] uppercase mb-1">Definition</label>
+          <textarea id="edit-definition" rows="2" class="w-full bg-[var(--background)] border border-[var(--border)] rounded-xl px-2.5 py-1.5 text-xs text-[var(--foreground)] leading-relaxed resize-none font-medium" required></textarea>
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-mono text-[var(--muted-foreground)] uppercase mb-1">Context Sentence</label>
+          <textarea id="edit-sentence" rows="2" class="w-full bg-[var(--background)] border border-[var(--border)] rounded-xl px-2.5 py-1.5 text-xs text-[var(--foreground)] italic leading-relaxed resize-none"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-mono text-[var(--muted-foreground)] uppercase mb-1">Mnemonic / Etymology Hint</label>
+          <input type="text" id="edit-hint" class="w-full bg-[var(--background)] border border-[var(--border)] rounded-xl px-2.5 py-1.5 text-xs text-amber-300 font-mono" />
+        </div>
+
+        <div class="flex items-center justify-between pt-2 border-t border-[var(--border)]">
+          <button type="button" id="btn-delete-card" class="btn btn-danger text-xs font-mono font-semibold px-2.5 py-1.5 flex items-center gap-1">
+            🗑 Delete
+          </button>
+          <div class="flex items-center gap-2">
+            <button type="button" id="btn-cancel-edit" class="btn btn-secondary text-xs px-3 py-1.5 font-medium">Cancel</button>
+            <button type="submit" class="btn btn-primary text-xs px-4 py-1.5 font-bold shadow-sm">Save Changes</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Interactive Logic -->
+  <script>
+    const DEFAULT_SEED_CARDS = [
+      {
+        card_id: "seed-zuhandenheit",
+        word: "zuhandenheit",
+        ipa: "/tsuːˈhandn̩haɪt/",
+        domain: "Ontology",
+        tier: 0,
+        definition: "The ontological mode of equipment when it functions smoothly as a transparent extension of human intent.",
+        context_sentence: "When a tool achieves Zuhandenheit, the artisan's attention flows through it directly into the work.",
+        etymology_hint: "German: zu (at) + Hand (hand) = literally 'at-hand'."
+      }
+    ];
+
+    let cachedCards = [];
+    try {
+      const stored = localStorage.getItem('lexis_cards_v3');
+      cachedCards = stored ? JSON.parse(stored) : [...DEFAULT_SEED_CARDS];
+    } catch (e) {
+      cachedCards = [...DEFAULT_SEED_CARDS];
+    }
+
+    function saveLocalCards() {
+      try {
+        localStorage.setItem('lexis_cards_v3', JSON.stringify(cachedCards));
+      } catch (e) {}
+      updateLexiconCounts();
+      if (typeof scheduleSpacedReviewReminder === 'function') {
+        scheduleSpacedReviewReminder();
+      }
+    }
+
+    let activeCard = null;
+    let dwellStart = Date.now();
+    let dwellInterval = null;
+    let sessionStartTime = Date.now();
+    let sessionReviewedCount = 0;
+    let cardIndex = 0;
+    let totalBatch = 1;
+    let undoStack = [];
+    let isDefinitionRevealed = false;
+    let currentFilter = 'all';
+    let isPracticeMode = false;
+    let activeSessionCards = [];
+
+    // Spaced Repetition Due Intervals (in seconds)
+    const TIER_INTERVALS_SECONDS = {
+      0: 4 * 3600,       // 4 hours
+      1: 24 * 3600,      // 1 day
+      2: 3 * 24 * 3600,  // 3 days
+      3: 7 * 24 * 3600,  // 7 days
+      4: 16 * 24 * 3600, // 16 days
+      5: 35 * 24 * 3600, // 35 days
+      6: 90 * 24 * 3600  // 90 days
+    };
+
+    // DOM Elements
+    const tabReview = document.getElementById('tab-review');
+    const tabLexicon = document.getElementById('tab-lexicon');
+    const viewReview = document.getElementById('view-review');
+    const viewLexicon = document.getElementById('view-lexicon');
+    const lexiconCountEl = document.getElementById('lexicon-count');
+    const lexiconSearchInput = document.getElementById('lexicon-search');
+    const lexiconList = document.getElementById('lexicon-list');
+
+    const cardWord = document.getElementById('card-word');
+    const cardIpa = document.getElementById('card-ipa');
+    const cardDomain = document.getElementById('card-domain');
+    const cardTier = document.getElementById('card-tier');
+    const cardDefinition = document.getElementById('card-definition');
+    const cardSentence = document.getElementById('card-sentence');
+    const dwellHintBox = document.getElementById('dwell-hint-box');
+    const cardHint = document.getElementById('card-hint');
+    const dwellTimerBar = document.getElementById('dwell-timer-bar');
+    const sessionCounter = document.getElementById('session-counter');
+    const cardView = document.getElementById('card-view');
+    const completionView = document.getElementById('completion-view');
+    const completionStats = document.getElementById('completion-stats');
+    const btnNextBatch = document.getElementById('btn-next-batch');
+    const btnPracticeAheadCompletion = document.getElementById('btn-practice-ahead-completion');
+    const nextWindowTime = document.getElementById('next-window-time');
+    const captureForm = document.getElementById('capture-form');
+    const newWordInput = document.getElementById('new-word-input');
+    const captureFeedback = document.getElementById('capture-feedback');
+
+    // Caught-Up (Zero Due) Elements
+    const caughtUpView = document.getElementById('caught-up-view');
+    const caughtUpDetails = document.getElementById('caught-up-details');
+    const caughtUpTierStat = document.getElementById('caught-up-tier-stat');
+    const caughtUpWindow = document.getElementById('caught-up-window');
+    const btnCramEarly = document.getElementById('btn-cram-early');
+    const btnOpenLexiconFromCaughtup = document.getElementById('btn-open-lexicon-from-caughtup');
+
+    // Modal Elements
+    const editModal = document.getElementById('edit-modal');
+    const editForm = document.getElementById('edit-form');
+    const editCardId = document.getElementById('edit-card-id');
+    const editWord = document.getElementById('edit-word');
+    const editIpa = document.getElementById('edit-ipa');
+    const editDomain = document.getElementById('edit-domain');
+    const editTier = document.getElementById('edit-tier');
+    const editDefinition = document.getElementById('edit-definition');
+    const editSentence = document.getElementById('edit-sentence');
+    const editHint = document.getElementById('edit-hint');
+    const btnCloseEdit = document.getElementById('btn-close-edit');
+    const btnCancelEdit = document.getElementById('btn-cancel-edit');
+    const btnDeleteCard = document.getElementById('btn-delete-card');
+    const btnQuickEdit = document.getElementById('btn-quick-edit');
+    const btnModalAutofill = document.getElementById('btn-modal-autofill');
+
+    function getTierLabel(tier) {
+      const labels = ["New (+4h)", "+1 Day", "+3 Days", "+7 Days", "+16 Days", "+35 Days", "Mastered (+90d)"];
+      return labels[tier] || `Tier ${tier}`;
+    }
+
+    function getTierColorClass(tier) {
+      if (tier === 0) return "text-indigo-400 border-indigo-800 bg-indigo-950/30";
+      if (tier <= 3) return "text-amber-400 border-amber-800/80 bg-amber-950/30";
+      return "text-emerald-400 border-emerald-800 bg-emerald-950/30";
+    }
+
+    // Comprehensive Built-in Lexicon (Instant Offline Fallback for High-Utility Terms)
+    const LOCAL_LEXICON = {
+      "zuhandenheit": {
+        definition: "The ontological mode of equipment when it functions smoothly as a transparent extension of human intent ('ready-to-hand').",
+        ipa: "/tsuːˈhandn̩haɪt/",
+        domain: "Ontology",
+        context_sentence: "When a tool achieves Zuhandenheit, the artisan's attention flows through it directly into the work.",
+        etymology_hint: "German: zu (at) + Hand (hand) = literally 'at-hand'."
+      },
+      "vorhandenheit": {
+        definition: "The ontological mode of an object when it malfunctions or breaks, becoming an alien, conspicuous obstacle ('present-at-hand').",
+        ipa: "/foːɐ̯ˈhandn̩haɪt/",
+        domain: "Ontology",
+        context_sentence: "The moment the hammer breaks, it collapses into Vorhandenheit.",
+        etymology_hint: "German: vor (before) + Hand (hand) = standing passively before the hand."
+      },
+      "tenacious": {
+        definition: "Holding fast; persistent; tending to keep a firm hold of something; stubborn or determined.",
+        ipa: "/təˈneɪ.ʃəs/",
+        domain: "Adjective",
+        context_sentence: "She was tenacious in pursuing the bug across recursive compiler boundary layers.",
+        etymology_hint: "Latin: tenax (holding fast), from tenere (to hold)."
+      },
+      "epistemic": {
+        definition: "Relating to knowledge or to the degree of its validation and cognitive warrant.",
+        ipa: "/ˌep.ɪˈstiː.mɪk/",
+        domain: "Epistemology",
+        context_sentence: "We applied epistemic pruning heuristics to avoid exploring tautological search branches.",
+        etymology_hint: "Greek: episteme (knowledge, understanding)."
+      },
+      "functor": {
+        definition: "A mapping between categories in mathematics that preserves objects, morphisms, and composition structures.",
+        ipa: "/ˈfʌŋk.tər/",
+        domain: "Mathematics",
+        context_sentence: "The AST compiles to multiple runtime extremities via a category-theoretic functor.",
+        etymology_hint: "Coined in modern logic from function + -or."
+      },
+      "landauer": {
+        definition: "Pertaining to Landauer's principle: any logically irreversible manipulation of information must dissipate heat per erased bit.",
+        ipa: "/ˈlæn.daʊ.ər/",
+        domain: "Physics",
+        context_sentence: "The daemon audits every state mutation against the Landauer thermodynamic dissipation bound.",
+        etymology_hint: "Named after physicist Rolf Landauer (1961)."
+      },
+      "panacea": {
+        definition: "A solution or remedy for all difficulties or diseases; a universal cure-all.",
+        ipa: "/ˌpæn.əˈsiː.ə/",
+        domain: "Noun",
+        context_sentence: "Microservices are not an architectural panacea for disorganized team communications.",
+        etymology_hint: "Greek: panakes (all-healing), from pan (all) + akos (cure)."
+      },
+      "galois": {
+        definition: "Relating to Galois theory or Galois connections: a pair of monotone maps between posets capturing optimal approximations.",
+        ipa: "/ɡælˈwɑː/",
+        domain: "Mathematics",
+        context_sentence: "The adjoint Galois connection bounds intent abstractions against physical machine state.",
+        etymology_hint: "Named after French mathematician Évariste Galois."
+      },
+      "parsimony": {
+        definition: "Extreme frugality; in science, the principle that the simplest sufficient explanation is preferred (Occam's razor).",
+        ipa: "/ˈpɑː.sɪ.mə.ni/",
+        domain: "Philosophy",
+        context_sentence: "Architectural parsimony prevented us from introducing unnecessary external dependencies.",
+        etymology_hint: "Latin: parsimonia (frugality, thrift), from parcere (to spare)."
+      },
+      "teleology": {
+        definition: "The explanation of phenomena by the purpose they serve rather than by postulated causes; goal-directed design.",
+        ipa: "/ˌtiː.liˈɒl.ə.dʒi/",
+        domain: "Philosophy",
+        context_sentence: "The high-level jettison grounds compiler teleology in production software that humans love.",
+        etymology_hint: "Greek: telos (end, purpose, goal) + -logia (study of)."
+      },
+      "serendipity": {
+        definition: "The occurrence and development of events by chance in a happy or beneficial way.",
+        ipa: "/ˌsɛr.ənˈdɪp.ə.ti/",
+        domain: "Noun",
+        context_sentence: "Finding the exact mathematical proof was a stroke of serendipity.",
+        etymology_hint: "Coined by Horace Walpole (1754) from the fairy tale 'The Three Princes of Serendip'."
+      },
+      "ephemeral": {
+        definition: "Lasting for a very short time; transitory; fleeting.",
+        ipa: "/ɪˈfem.ər.əl/",
+        domain: "Adjective",
+        context_sentence: "Transient cache entries are ephemeral artifacts that decay quickly.",
+        etymology_hint: "Greek: ephemeros (lasting only a day), from epi (upon) + hemera (day)."
+      },
+      "ubiquitous": {
+        definition: "Present, appearing, or found everywhere; omnipresent.",
+        ipa: "/juːˈbɪk.wɪ.təs/",
+        domain: "Adjective",
+        context_sentence: "Smartphones have become ubiquitous across modern urban society.",
+        etymology_hint: "Latin: ubique (everywhere)."
+      },
+      "esoteric": {
+        definition: "Intended for or likely to be understood by only a small number of people with specialized knowledge.",
+        ipa: "/ˌes.əˈter.ɪk/",
+        domain: "Adjective",
+        context_sentence: "The compiler internals rely on esoteric type-theoretic constructs.",
+        etymology_hint: "Greek: esoterikos (belonging to an inner circle), from eso (within)."
+      },
+      "pragmatic": {
+        definition: "Dealing with things sensibly and realistically in a way that is based on practical rather than theoretical considerations.",
+        ipa: "/præɡˈmæt.ɪk/",
+        domain: "Adjective",
+        context_sentence: "He took a pragmatic approach to system design, shipping working code over pure theory.",
+        etymology_hint: "Greek: pragmatikos (fit for business), from pragma (deed, matter)."
+      },
+      "paradigm": {
+        definition: "A typical example or pattern of something; a distinct set of concepts or thought patterns.",
+        ipa: "/ˈpær.ə.daɪm/",
+        domain: "Noun",
+        context_sentence: "Functional reactive programming represents a distinct architectural paradigm.",
+        etymology_hint: "Greek: paradeigma (pattern, model), from para (beside) + deiknunai (to show)."
+      },
+      "dichotomy": {
+        definition: "A division or contrast between two things that are or are represented as being opposed or entirely different.",
+        ipa: "/daɪˈkɒt.ə.mi/",
+        domain: "Noun",
+        context_sentence: "We explored the false dichotomy between strict formal correctness and developer velocity.",
+        etymology_hint: "Greek: dikhotomia, from dikho (in two) + temnein (to cut)."
+      },
+      "mellifluous": {
+        definition: "Pleasingly smooth and musical to hear; sweet-sounding.",
+        ipa: "/məˈlɪf.lu.əs/",
+        domain: "Adjective",
+        context_sentence: "The cellist produced a mellifluous tone that captivated the auditorium.",
+        etymology_hint: "Latin: mellifluus, from mel (honey) + fluere (to flow)."
+      },
+      "anomalous": {
+        definition: "Deviating from what is standard, normal, or expected; irregular.",
+        ipa: "/əˈnɒm.ə.ləs/",
+        domain: "Adjective",
+        context_sentence: "The anomaly detector flagged an anomalous surge in network packet drops.",
+        etymology_hint: "Greek: anomalos (uneven, irregular), from an- (not) + homalos (even)."
+      }
+    };
+
+    // Online & Offline Dictionary Resolution Engine
+    async function fetchOnlineDefinition(word) {
+      const clean = (word || '').trim().toLowerCase();
+      if (!clean) return null;
+
+      // 1. Instant check against local built-in dictionary
+      if (LOCAL_LEXICON[clean]) {
+        return { ...LOCAL_LEXICON[clean], word: clean };
+      }
+
+      let res = {
+        word: clean,
+        definition: '',
+        ipa: `/${clean}/`,
+        domain: 'Vocabulary',
+        context_sentence: '',
+        etymology_hint: ''
+      };
+
+      // 2. Fetch Wiktionary Plain-Text Extract (Full CORS enabled with origin=*)
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3500);
+        const wUrl = `https://en.wiktionary.org/w/api.php?action=query&prop=extracts&explaintext=1&titles=${encodeURIComponent(clean)}&format=json&origin=*`;
+        const wResp = await fetch(wUrl, { signal: controller.signal });
+        clearTimeout(timeoutId);
+        if (wResp.ok) {
+          const wData = await wResp.json();
+          const pages = (wData && wData.query && wData.query.pages) ? Object.values(wData.query.pages) : [];
+          if (pages.length > 0 && pages[0].extract) {
+            const text = pages[0].extract;
+
+            // Etymology / Mnemonic
+            const etymMatch = text.match(/===\s*Etymology(?:\s*\d+)?\s*===\s*\n([\s\S]*?)(?=\n===|$)/);
+            if (etymMatch && etymMatch[1]) {
+              const elines = etymMatch[1].split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('==') && l.length > 15);
+              if (elines.length > 0) {
+                res.etymology_hint = elines[0];
+              }
+            }
+
+            // IPA
+            const ipaMatch = text.match(/\/[^/\n]{2,35}\//);
+            if (ipaMatch) {
+              res.ipa = ipaMatch[0];
+            }
+
+            // POS, Definition & Quotations
+            const posRegex = /===\s*(Noun|Verb|Adjective|Adverb)\s*===\s*\n([\s\S]*?)(?=\n===|$)/g;
+            let m;
+            while ((m = posRegex.exec(text)) !== null) {
+              if (!res.definition) {
+                res.domain = m[1];
+                const bodyLines = m[2].split('\n').map(l => l.trim()).filter(Boolean);
+                for (const l of bodyLines) {
+                  if (l.startsWith('Synonym') || l.startsWith('Antonym') || l.startsWith('(')) continue;
+                  if (!l.startsWith(`${clean} `) && !l.startsWith(`${clean}(`) && l.length > 10) {
+                    res.definition = l;
+                    break;
+                  }
+                }
+                for (const l of bodyLines) {
+                  if (l.toLowerCase().includes(clean) && l.length > 30) {
+                    if (!l.startsWith(`${clean} (`) && !l.startsWith('Synonym') && !l.startsWith('Antonym')) {
+                      res.context_sentence = l;
+                      break;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      } catch (e) {
+        console.warn("[Lexis] Wiktionary extract fallback:", e);
+      }
+
+      // 3. Datamuse fallback if definition is still empty
+      if (!res.definition) {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 3000);
+          const dUrl = `https://api.datamuse.com/words?sp=${encodeURIComponent(clean)}&md=dpf&max=1`;
+          const dResp = await fetch(dUrl, { signal: controller.signal });
+          clearTimeout(timeoutId);
+          if (dResp.ok) {
+            const dData = await dResp.json();
+            if (Array.isArray(dData) && dData.length > 0 && dData[0].defs && dData[0].defs.length > 0) {
+              const rawDef = dData[0].defs[0];
+              const parts = rawDef.split('\t');
+              const posCode = parts[0] || 'n';
+              const defText = (parts[1] || rawDef).trim();
+              const posMap = { 'n': 'Noun', 'v': 'Verb', 'adj': 'Adjective', 'adv': 'Adverb' };
+              if (res.domain === 'Vocabulary') res.domain = posMap[posCode] || 'Vocabulary';
+              res.definition = defText;
+            }
+          }
+        } catch (e) {
+          console.warn("[Lexis] Datamuse fallback:", e);
+        }
+      }
+
+      // 4. Fallback contextual sentence if still missing
+      if (!res.context_sentence) {
+        if (res.domain === 'Adjective') {
+          res.context_sentence = `\"Her ${clean} perspective challenged the conventional assumptions of the team.\"`;
+        } else if (res.domain === 'Verb') {
+          res.context_sentence = `\"Researchers actively ${clean} these dynamics across contemporary critical literature.\"`;
+        } else {
+          res.context_sentence = `\"The concept of ${clean} served as a key focal point in the philosophical analysis.\"`;
+        }
+      }
+
+      // 5. Fallback mnemonic if still missing
+      if (!res.etymology_hint) {
+        res.etymology_hint = `Mnemonic: connect '${clean}' to its root morphemes, prefix/suffix patterns, and distinctive sound associations.`;
+      }
+
+      if (res.definition) {
+        return res;
+      }
+
+      return null;
+    }
+
+    // Spaced Repetition Due Queue Calculations
+    function getDueCards(allowEarly = false) {
+      const now = Date.now() / 1000;
+      if (allowEarly) {
+        return [...cachedCards].sort((a, b) => (a.due_timestamp || 0) - (b.due_timestamp || 0));
+      }
+      return cachedCards.filter(c => (c.due_timestamp || 0) <= now);
+    }
+
+    function showCaughtUpView() {
+      if (dwellInterval) clearInterval(dwellInterval);
+      cardView.classList.add('hidden');
+      completionView.classList.add('hidden');
+      caughtUpView.classList.remove('hidden');
+
+      const now = Date.now() / 1000;
+      let nextCard = null;
+      let minDiff = Infinity;
+      cachedCards.forEach(c => {
+        const diff = (c.due_timestamp || 0) - now;
+        if (diff > 0 && diff < minDiff) {
+          minDiff = diff;
+          nextCard = c;
+        }
+      });
+
+      if (nextCard && minDiff < Infinity) {
+        const hours = Math.round(minDiff / 3600);
+        const timeStr = hours <= 1 ? "in <1 hour" : hours < 24 ? `in ~${hours} hours` : `in ~${Math.round(hours / 24)} days`;
+        caughtUpDetails.textContent = `0 cards due right now. Next review for '${nextCard.word}' is scheduled ${timeStr}.`;
+        caughtUpTierStat.textContent = `T${nextCard.tier}: ${getTierLabel(nextCard.tier)}`;
+      } else {
+        caughtUpDetails.textContent = `0 cards due right now. All captured vocabulary terms have been reviewed.`;
+        caughtUpTierStat.textContent = `Mastery Retained`;
+      }
+
+      const curHour = new Date().getHours();
+      caughtUpWindow.textContent = curHour < 12 ? 'Afternoon (14:00)' : curHour < 18 ? 'Evening (19:30)' : 'Tomorrow Morning (08:30)';
+      scheduleSpacedReviewReminder();
+    }
+
+    function startReviewSession(isEarly = false) {
+      isPracticeMode = isEarly;
+      const dueCards = getDueCards(isEarly);
+
+      if (dueCards.length === 0) {
+        showCaughtUpView();
+        return;
+      }
+
+      activeSessionCards = dueCards.slice(0, Math.min(3, dueCards.length));
+      totalBatch = activeSessionCards.length;
+      cardIndex = 0;
+      sessionReviewedCount = 0;
+      sessionStartTime = Date.now();
+
+      caughtUpView.classList.add('hidden');
+      completionView.classList.add('hidden');
+      cardView.classList.remove('hidden');
+
+      renderCard(activeSessionCards[0]);
+    }
+
+    // Tab Switching
+    function setTab(tab) {
+      if (tab === 'review') {
+        tabReview.className = 'tab-btn active-review';
+        tabLexicon.className = 'tab-btn';
+        viewReview.classList.remove('hidden');
+        viewLexicon.classList.add('hidden');
+        const due = getDueCards(false);
+        if (due.length === 0 && !isPracticeMode) {
+          showCaughtUpView();
+        } else if (!activeCard) {
+          startReviewSession(false);
+        }
+      } else {
+        tabLexicon.className = 'tab-btn active-lexicon';
+        tabReview.className = 'tab-btn';
+        viewLexicon.classList.remove('hidden');
+        viewReview.classList.add('hidden');
+        renderLexiconList();
+        fetchFullDeck();
+      }
+    }
+    tabReview.addEventListener('click', () => setTab('review'));
+    tabLexicon.addEventListener('click', () => setTab('lexicon'));
+    document.getElementById('btn-open-lexicon-from-completion').addEventListener('click', () => setTab('lexicon'));
+
+    function updateLexiconCounts() {
+      lexiconCountEl.textContent = cachedCards.length;
+      document.getElementById('filter-all-count').textContent = cachedCards.length;
+      document.getElementById('filter-new-count').textContent = cachedCards.filter(c => c.tier === 0).length;
+      document.getElementById('filter-learning-count').textContent = cachedCards.filter(c => c.tier >= 1 && c.tier <= 3).length;
+      document.getElementById('filter-mastered-count').textContent = cachedCards.filter(c => c.tier >= 4).length;
+    }
+
+    // Lexicon Rendering & Filtering
+    function renderLexiconList() {
+      updateLexiconCounts();
+      const query = (lexiconSearchInput.value || '').trim().toLowerCase();
+
+      let filtered = cachedCards.filter(card => {
+        // Tier filter
+        if (currentFilter === 'new' && card.tier !== 0) return false;
+        if (currentFilter === 'learning' && (card.tier < 1 || card.tier > 3)) return false;
+        if (currentFilter === 'mastered' && card.tier < 4) return false;
+
+        // Search query
+        if (!query) return true;
+        return (
+          (card.word && card.word.toLowerCase().includes(query)) ||
+          (card.definition && card.definition.toLowerCase().includes(query)) ||
+          (card.domain && card.domain.toLowerCase().includes(query)) ||
+          (card.etymology_hint && card.etymology_hint.toLowerCase().includes(query))
+        );
+      });
+
+      lexiconList.innerHTML = '';
+      if (filtered.length === 0) {
+        lexiconList.innerHTML = `
+          <div class="text-center py-8 text-xs text-[var(--muted-foreground)] font-mono space-y-1">
+            <p>No vocabulary terms matched the search filter.</p>
+            <p class="text-[10px]">Capture words above or reset filters.</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(card => {
+        const item = document.createElement('div');
+        item.className = 'bg-[var(--card)] border border-[var(--border)] hover:border-indigo-500/60 rounded-xl p-3 space-y-1.5 transition-all cursor-pointer shadow-sm';
+        item.innerHTML = `
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-sm text-[var(--foreground)] capitalize">${card.word}</span>
+              <span class="text-xs font-mono text-indigo-400">${card.ipa || ''}</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded border ${getTierColorClass(card.tier)} font-semibold">
+                T${card.tier}: ${getTierLabel(card.tier)}
+              </span>
+              <span class="text-xs text-[var(--muted-foreground)]">✏️</span>
+            </div>
+          </div>
+          <p class="text-xs text-[var(--foreground)] leading-snug line-clamp-2">${card.definition || ''}</p>
+          <div class="flex items-center justify-between text-[10px] text-[var(--muted-foreground)] pt-0.5">
+            <span class="font-mono uppercase text-indigo-300 font-medium">${card.domain || 'Vocabulary'}</span>
+            <span class="font-mono italic truncate max-w-[200px]">"${card.context_sentence || ''}"</span>
+          </div>
+        `;
+        item.addEventListener('click', () => openEditModal(card));
+        lexiconList.appendChild(item);
+      });
+    }
+
+    lexiconSearchInput.addEventListener('input', renderLexiconList);
+
+    document.querySelectorAll('.filter-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-pill').forEach(b => {
+          b.className = 'filter-pill';
+        });
+        btn.className = 'filter-pill active';
+        currentFilter = btn.dataset.filter;
+        renderLexiconList();
+      });
+    });
+
+    // Card Edit Modal Handlers
+    function openEditModal(card) {
+      if (!card) return;
+      editCardId.value = card.card_id;
+      editWord.value = card.word || '';
+      editIpa.value = card.ipa || '';
+      editDomain.value = card.domain || '';
+      editTier.value = String(card.tier || 0);
+      editDefinition.value = card.definition || '';
+      editSentence.value = card.context_sentence || '';
+      editHint.value = card.etymology_hint || '';
+      editModal.classList.remove('hidden');
+    }
+
+    function closeEditModal() {
+      editModal.classList.add('hidden');
+    }
+
+    btnCloseEdit.addEventListener('click', closeEditModal);
+    btnCancelEdit.addEventListener('click', closeEditModal);
+    btnQuickEdit.addEventListener('click', () => {
+      if (activeCard) openEditModal(activeCard);
+    });
+
+    editForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const cardId = editCardId.value;
+      const updates = {
+        card_id: cardId,
+        word: editWord.value.trim().toLowerCase(),
+        ipa: editIpa.value.trim(),
+        domain: editDomain.value.trim(),
+        tier: parseInt(editTier.value, 10),
+        definition: editDefinition.value.trim(),
+        context_sentence: editSentence.value.trim(),
+        etymology_hint: editHint.value.trim(),
+      };
+
+      // 1. Update in local cache
+      const idx = cachedCards.findIndex(c => c.card_id === cardId);
+      if (idx !== -1) {
+        cachedCards[idx] = { ...cachedCards[idx], ...updates };
+      }
+      saveLocalCards();
+
+      // If updating current active card, refresh view
+      if (activeCard && activeCard.card_id === cardId) {
+        renderCard(cachedCards[idx]);
+      }
+
+      renderLexiconList();
+      closeEditModal();
+      triggerHaptic('mastered');
+
+      // 2. Synchronize to server if online
+      if (window.location.protocol !== 'file:') {
+        try {
+          await fetch('/api/cards/update', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(updates)
+          });
+        } catch (err) {
+          console.warn("[Lexis] Server sync pending:", err);
+        }
+      }
+    });
+
+    btnDeleteCard.addEventListener('click', async () => {
+      const cardId = editCardId.value;
+      const targetWord = editWord.value;
+      if (!confirm(`Delete '${targetWord}' from your lexicon?`)) return;
+
+      // 1. Delete locally
+      cachedCards = cachedCards.filter(c => c.card_id !== cardId);
+      saveLocalCards();
+
+      if (activeCard && activeCard.card_id === cardId) {
+        cardIndex = 0;
+        if (cachedCards.length > 0) renderCard(cachedCards[0]);
+      }
+
+      renderLexiconList();
+      closeEditModal();
+      triggerHaptic('review');
+
+      // 2. Sync deletion to server
+      if (window.location.protocol !== 'file:') {
+        try {
+          await fetch('/api/cards/delete', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ card_id: cardId })
+          });
+        } catch (err) {}
+      }
+    });
+
+    // Background Deck Synchronization
+    async function fetchFullDeck() {
+      if (window.location.protocol === 'file:') return;
+      try {
+        const res = await fetch('/api/cards');
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.cards && data.cards.length > 0) {
+          cachedCards = data.cards;
+          saveLocalCards();
+          renderLexiconList();
+        }
+      } catch (err) {}
+    }
+
+    // Flashcard Active Recall Logic
+    function revealDefinition() {
+      if (isDefinitionRevealed) return;
+      isDefinitionRevealed = true;
+      const promptEl = document.getElementById('reveal-prompt');
+      const detailsEl = document.getElementById('card-details');
+      if (promptEl) promptEl.classList.add('hidden');
+      if (detailsEl) detailsEl.classList.remove('hidden');
+    }
+
+    function renderCard(card) {
+      if (!card) return;
+      activeCard = card;
+      isDefinitionRevealed = false;
+      dwellStart = Date.now();
+      cardView.classList.remove('hidden');
+      completionView.classList.add('hidden');
+      caughtUpView.classList.add('hidden');
+      dwellHintBox.classList.add('hidden');
+
+      const promptEl = document.getElementById('reveal-prompt');
+      const detailsEl = document.getElementById('card-details');
+      if (promptEl) promptEl.classList.remove('hidden');
+      if (detailsEl) detailsEl.classList.add('hidden');
+
+      cardWord.textContent = card.word;
+      cardIpa.textContent = card.ipa || `/${card.word}/`;
+      cardDomain.textContent = card.domain || "Vocabulary";
+      cardTier.textContent = `Tier ${card.tier || 0}: ${getTierLabel(card.tier || 0)}`;
+      cardDefinition.textContent = card.definition || "No definition provided.";
+      
+      const s = (card.context_sentence || '').trim();
+      cardSentence.textContent = s ? (s.startsWith('"') ? s : `"${s}"`) : `Studying '${card.word}' in contextual literature.`;
+
+      const h = (card.etymology_hint || '').trim();
+      const hintText = h || `Mnemonic: examine morphological roots and distinctive sounds of '${card.word}'.`;
+      cardHint.textContent = hintText;
+      const cardMnemonicDetail = document.getElementById('card-mnemonic-detail');
+      if (cardMnemonicDetail) {
+        cardMnemonicDetail.textContent = hintText;
+      }
+
+      if (isPracticeMode) {
+        sessionCounter.textContent = `⚡ Practice ${cardIndex + 1} of ${totalBatch} (Ahead of Schedule)`;
+        sessionCounter.className = "font-mono text-[10px] text-amber-400 font-semibold";
+      } else {
+        sessionCounter.textContent = `Card ${cardIndex + 1} of ${totalBatch}`;
+        sessionCounter.className = "font-mono text-[10px] text-emerald-400 font-semibold";
+      }
+
+      startDwellPatienceTimer();
+    }
+
+    function startDwellPatienceTimer() {
+      if (dwellInterval) clearInterval(dwellInterval);
+      dwellTimerBar.style.width = '0%';
+      dwellTimerBar.className = 'h-full bg-indigo-500 transition-all duration-300';
+
+      dwellInterval = setInterval(() => {
+        const elapsed = (Date.now() - dwellStart) / 1000;
+        const pct = Math.min(100, (elapsed / 10.0) * 100);
+        dwellTimerBar.style.width = `${pct}%`;
+
+        if (elapsed >= 10.0) {
+          dwellHintBox.classList.remove('hidden');
+          dwellTimerBar.className = 'h-full bg-amber-500 transition-all duration-300';
+          clearInterval(dwellInterval);
+        }
+      }, 100);
+    }
+
+    async function fetchSession() {
+      if (window.location.protocol === 'file:') return;
+      try {
+        const res = await fetch('/api/review/next');
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+        if (data.all_caught_up || !data.session || data.session.cards.length === 0) {
+          if (!isPracticeMode) {
+            showCaughtUpView();
+          }
+          return;
+        }
+        if (data.session && data.session.cards.length > 0) {
+          activeSessionCards = data.session.cards;
+          totalBatch = data.session.cards.length;
+          cardIndex = data.session.current_index;
+          if (data.session.completed || cardIndex >= totalBatch) {
+            showCompletion();
+          } else {
+            renderCard(data.session.cards[cardIndex]);
+          }
+        }
+      } catch (err) {}
+    }
+
+    async function submitAnswer(outcome) {
+      if (!activeCard) return;
+      const dwellSeconds = (Date.now() - dwellStart) / 1000;
+      if (dwellInterval) clearInterval(dwellInterval);
+
+      sessionReviewedCount++;
+      undoStack.push({ card: {...activeCard}, index: cardIndex });
+
+      const now = Date.now() / 1000;
+      activeCard.last_reviewed = now;
+      activeCard.review_count = (activeCard.review_count || 0) + 1;
+
+      // Spaced repetition schedule update
+      if (outcome === 'MASTERED') {
+        activeCard.tier = Math.min(6, (activeCard.tier || 0) + 1);
+        activeCard.consecutive_correct = (activeCard.consecutive_correct || 0) + 1;
+        activeCard.due_timestamp = now + TIER_INTERVALS_SECONDS[activeCard.tier];
+      } else {
+        activeCard.tier = Math.max(0, (activeCard.tier || 0) - 1);
+        activeCard.consecutive_correct = 0;
+        activeCard.due_timestamp = now + (activeCard.tier === 0 ? 2 * 3600 : TIER_INTERVALS_SECONDS[activeCard.tier]);
+      }
+      saveLocalCards();
+
+      if (window.location.protocol !== 'file:') {
+        try {
+          const res = await fetch('/api/review/answer', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              card_id: activeCard.card_id,
+              outcome: outcome,
+              dwell_seconds: dwellSeconds,
+            })
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (data.session_completed) {
+              showCompletion();
+              return;
+            }
+          }
+        } catch (err) {}
+      }
+
+      cardIndex++;
+      if (cardIndex >= totalBatch) {
+        showCompletion();
+      } else {
+        renderCard(activeSessionCards[cardIndex] || cachedCards[cardIndex] || activeCard);
+      }
+    }
+
+    function showCompletion() {
+      if (dwellInterval) clearInterval(dwellInterval);
+      cardView.classList.add('hidden');
+      caughtUpView.classList.add('hidden');
+      completionView.classList.remove('hidden');
+
+      const count = sessionReviewedCount > 0 ? sessionReviewedCount : (totalBatch || 1);
+      const elapsedSeconds = Math.max(1, Math.round((Date.now() - sessionStartTime) / 1000));
+      const wordText = count === 1 ? '1 word' : `${count} words`;
+      const timeText = elapsedSeconds === 1 ? '1 second' : `${elapsedSeconds} seconds`;
+
+      if (completionStats) {
+        completionStats.textContent = `${wordText} reviewed in ${timeText}.`;
+      }
+
+      const dueRemaining = getDueCards(false).length;
+      if (btnNextBatch) {
+        if (dueRemaining === 0) {
+          btnNextBatch.textContent = 'Done for Now';
+        } else {
+          btnNextBatch.textContent = dueRemaining === 1 ? 'Review Next (1)' : `Review Another ${Math.min(3, dueRemaining)}`;
+        }
+      }
+
+      if (btnPracticeAheadCompletion) {
+        btnPracticeAheadCompletion.classList.remove('hidden');
+      }
+
+      if (nextWindowTime) {
+        const hour = new Date().getHours();
+        nextWindowTime.textContent = hour < 12 ? 'Afternoon (14:00)' : hour < 18 ? 'Evening (19:30)' : 'Tomorrow Morning (08:30)';
+      }
+
+      sessionCounter.textContent = `Done (${count}/${count})`;
+      scheduleSpacedReviewReminder();
+    }
+
+    // Button event listeners
+    document.getElementById('btn-mastered').addEventListener('click', () => submitAnswer('MASTERED'));
+    document.getElementById('btn-review').addEventListener('click', () => submitAnswer('STRUGGLING'));
+    
+    document.getElementById('btn-undo').addEventListener('click', async () => {
+      sessionReviewedCount = Math.max(0, sessionReviewedCount - 1);
+      if (window.location.protocol !== 'file:') {
+        try {
+          const res = await fetch('/api/rollback', {method: 'POST'});
+          if (res.ok) {
+            const data = await res.json();
+            if (data.success && data.card) {
+              cardIndex = Math.max(0, cardIndex - 1);
+              renderCard(data.card);
+              return;
+            }
+          }
+        } catch (e) {}
+      }
+
+      if (undoStack.length > 0) {
+        const last = undoStack.pop();
+        cardIndex = last.index;
+        renderCard(last.card);
+      }
+    });
+
+    btnNextBatch.addEventListener('click', async () => {
+      const dueRemaining = getDueCards(false).length;
+      if (dueRemaining === 0) {
+        showCaughtUpView();
+        return;
+      }
+      startReviewSession(false);
+    });
+
+    btnPracticeAheadCompletion.addEventListener('click', () => {
+      startReviewSession(true);
+    });
+
+    btnCramEarly.addEventListener('click', () => {
+      startReviewSession(true);
+    });
+
+    btnOpenLexiconFromCaughtup.addEventListener('click', () => setTab('lexicon'));
+
+    // Test Notification Button Handler with 10s grace period for background unloading
+    let testNotificationUntil = 0;
+    const btnTestNotification = document.getElementById('btn-test-notification');
+    const testNotifStatus = document.getElementById('test-notif-status');
+
+    if (btnTestNotification) {
+      btnTestNotification.addEventListener('click', () => {
+        const delaySeconds = 10;
+        testNotificationUntil = Date.now() + 30000; // Guard for 30s so background events do not overwrite the test alarm
+
+        const testWord = (cachedCards && cachedCards.length > 0) ? cachedCards[0].word : "zuhandenheit";
+        const title = "Axioma Lexis · Practice Alert (Test)";
+        const message = `Test recall succeeded! '${testWord}' is ready for review.`;
+
+        // 1. Native Android Bridge
+        if (window.AndroidBridge) {
+          try {
+            if (typeof window.AndroidBridge.requestNotificationPermission === 'function') {
+              window.AndroidBridge.requestNotificationPermission();
+            }
+            if (typeof window.AndroidBridge.postTestNotification === 'function') {
+              window.AndroidBridge.postTestNotification(title, message, delaySeconds);
+            } else if (typeof window.AndroidBridge.postNotification === 'function') {
+              window.AndroidBridge.postNotification(title, message, delaySeconds);
+            }
+            if (typeof window.AndroidBridge.showToast === 'function') {
+              window.AndroidBridge.showToast("⏱️ Test alert in 10s! Swipe away app to test background wakeup.");
+            }
+            if (testNotifStatus) {
+              testNotifStatus.textContent = "⏱️ Alert scheduled for 10s from now! Swipe away or lock app.";
+              testNotifStatus.classList.remove('hidden');
+              setTimeout(() => {
+                testNotifStatus.classList.add('hidden');
+              }, 9500);
+            }
+          } catch (err) {
+            alert("Error scheduling notification: " + err.message);
+          }
+        } else if ('Notification' in window) {
+          // 2. Browser / PWA fallback
+          const triggerWebNotif = () => {
+            setTimeout(() => {
+              new Notification(title, { body: message, icon: '/icon.svg' });
+            }, delaySeconds * 1000);
+          };
+
+          if (Notification.permission === 'default') {
+            Notification.requestPermission().then(perm => {
+              if (perm === 'granted') triggerWebNotif();
+            });
+          } else if (Notification.permission === 'granted') {
+            triggerWebNotif();
+          }
+
+          if (testNotifStatus) {
+            testNotifStatus.textContent = "⏱️ Web test alert scheduled for 10s!";
+            testNotifStatus.classList.remove('hidden');
+            setTimeout(() => {
+              testNotifStatus.classList.add('hidden');
+            }, 9500);
+          }
+        }
+      });
+    }
+
+    // Helper: calculate delay to next review window (Morning 08:30, Afternoon 14:00, Evening 19:30)
+    function getNextPracticeWindowDelaySeconds(forceNextDay = false) {
+      const now = new Date();
+      const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+      const windows = [
+        { name: 'morning', minutes: 8 * 60 + 30 },
+        { name: 'afternoon', minutes: 14 * 60 },
+        { name: 'evening', minutes: 19 * 60 + 30 }
+      ];
+
+      if (!forceNextDay) {
+        for (const w of windows) {
+          if (w.minutes > currentMinutes + 10) {
+            return Math.max(60, (w.minutes - currentMinutes) * 60 - now.getSeconds());
+          }
+        }
+      }
+
+      const minutesUntilMidnight = (24 * 60) - currentMinutes;
+      const totalMinutes = minutesUntilMidnight + (8 * 60 + 30);
+      return Math.max(60, totalMinutes * 60 - now.getSeconds());
+    }
+
+    // Helper: adjust timestamp to prevent notifications during quiet hours (22:00 to 07:30)
+    function adjustForQuietHours(targetMillis) {
+      const date = new Date(targetMillis);
+      const hour = date.getHours();
+      if (hour >= 22 || hour < 7 || (hour === 7 && date.getMinutes() < 30)) {
+        if (hour >= 22) {
+          date.setDate(date.getDate() + 1);
+        }
+        date.setHours(8, 30, 0, 0);
+        return date.getTime();
+      }
+      return targetMillis;
+    }
+
+    // Spaced Repetition Notification Scheduler
+    function scheduleSpacedReviewReminder(force = false) {
+      if (!force && Date.now() < testNotificationUntil) {
+        return; // Guard active test notification from being canceled or overwritten
+      }
+
+      const now = Date.now() / 1000;
+      const dueCards = getDueCards(false);
+
+      let title = "Axioma Lexis · Spaced Review Due";
+      let message = "";
+      let delaySeconds = 0;
+
+      if (dueCards.length > 0) {
+        const count = dueCards.length;
+        const promptWord = dueCards[0].word;
+        title = `Axioma Lexis · ${count} Word${count > 1 ? 's' : ''} Ready`;
+        message = count === 1
+          ? `Daily recall time: '${promptWord}' is due for a 30s review.`
+          : `Daily recall time: '${promptWord}' and ${count - 1} other cards are waiting.`;
+
+        delaySeconds = getNextPracticeWindowDelaySeconds(false);
+      } else {
+        let nextCard = null;
+        let minDiff = Infinity;
+        cachedCards.forEach(c => {
+          const diff = (c.due_timestamp || 0) - now;
+          if (diff > 0 && diff < minDiff) {
+            minDiff = diff;
+            nextCard = c;
+          }
+        });
+
+        if (nextCard && minDiff < Infinity) {
+          title = "Axioma Lexis · Spaced Review Due";
+          message = `Time for daily recall: '${nextCard.word}' is ready for review.`;
+          let targetMillis = (nextCard.due_timestamp || (now + minDiff)) * 1000;
+          targetMillis = adjustForQuietHours(targetMillis);
+          delaySeconds = Math.max(60, Math.round((targetMillis - Date.now()) / 1000));
+        } else {
+          title = "Axioma Lexis · Daily Practice";
+          message = "Review your active vocabulary deck and capture new terms.";
+          delaySeconds = getNextPracticeWindowDelaySeconds(true);
+        }
+      }
+
+      // 1. Android Bridge (Native App)
+      if (window.AndroidBridge && typeof window.AndroidBridge.postNotification === 'function') {
+        try {
+          if (typeof window.AndroidBridge.requestNotificationPermission === 'function') {
+            window.AndroidBridge.requestNotificationPermission();
+          }
+          window.AndroidBridge.postNotification(title, message, delaySeconds);
+        } catch (e) {}
+      }
+
+      // 2. Web Notification fallback
+      if (!window.AndroidBridge && 'Notification' in window) {
+        if (Notification.permission === 'default') {
+          Notification.requestPermission().catch(() => {});
+        }
+      }
+    }
+
+    // Refresh reminder when user backgrounds or switches away from the app
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        scheduleSpacedReviewReminder();
+      }
+    });
+
+    // Modal Auto-Fill Definition Button
+    btnModalAutofill.addEventListener('click', async () => {
+      const targetWord = editWord.value.trim();
+      if (!targetWord) return;
+      btnModalAutofill.textContent = "⏳ Looking up...";
+      const entry = await fetchOnlineDefinition(targetWord);
+      btnModalAutofill.textContent = "✨ Auto-Fill Definition";
+      if (entry) {
+        if (entry.definition) editDefinition.value = entry.definition;
+        if (entry.ipa) editIpa.value = entry.ipa;
+        if (entry.domain) editDomain.value = entry.domain;
+        if (entry.context_sentence) editSentence.value = entry.context_sentence;
+        if (entry.etymology_hint) editHint.value = entry.etymology_hint;
+        triggerHaptic('mastered');
+      } else {
+        alert(`No dictionary definition found for '${targetWord}'. You can enter a custom definition.`);
+      }
+    });
+
+    // Instant Word Capture with Automatic Dictionary Hydration
+    captureForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const val = newWordInput.value.trim();
+      if (!val) return;
+
+      captureFeedback.textContent = `🔍 Looking up definition for '${val}'...`;
+      captureFeedback.classList.remove('hidden');
+
+      const dictEntry = await fetchOnlineDefinition(val);
+
+      const nowSec = Date.now() / 1000;
+      const newCard = {
+        card_id: "local-" + Date.now(),
+        word: val.toLowerCase(),
+        ipa: dictEntry ? dictEntry.ipa : `/${val.toLowerCase()}/`,
+        domain: dictEntry ? dictEntry.domain : "General",
+        tier: 0,
+        definition: dictEntry ? dictEntry.definition : `Lexical acquisition entry for '${val}'.`,
+        context_sentence: dictEntry ? dictEntry.context_sentence : `Studying '${val}' in daily practice.`,
+        etymology_hint: dictEntry ? dictEntry.etymology_hint : `Check root morphemes for '${val}'.`,
+        created_at: nowSec,
+        due_timestamp: nowSec, // Immediately due for first review!
+        review_count: 0,
+        consecutive_correct: 0,
+        history: []
+      };
+
+      cachedCards.unshift(newCard);
+      saveLocalCards();
+      renderLexiconList();
+      newWordInput.value = '';
+
+      if (dictEntry) {
+        captureFeedback.textContent = `✓ Auto-populated definition for '${val}'!`;
+      } else {
+        captureFeedback.textContent = `✓ Added '${val}' to deck (tap to edit details)`;
+        openEditModal(newCard);
+      }
+      setTimeout(() => captureFeedback.classList.add('hidden'), 3500);
+
+      // If review view was showing "All Caught Up", start review of the new word!
+      if (!caughtUpView.classList.contains('hidden') && !viewReview.classList.contains('hidden')) {
+        startReviewSession(false);
+      }
+
+      // Sync to backend if online
+      if (window.location.protocol !== 'file:') {
+        try {
+          fetch('/api/cards/update', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(newCard)
+          }).catch(() => {});
+        } catch (err) {}
+      }
+    });
+
+    function triggerHaptic(type) {
+      if (window.AndroidBridge && typeof window.AndroidBridge.vibrate === 'function') {
+        try {
+          if (type === 'tap') window.AndroidBridge.vibrate(10);
+          else if (type === 'mastered') window.AndroidBridge.vibrate(25);
+          else if (type === 'review') window.AndroidBridge.vibrate(60);
+          else if (type === 'undo') window.AndroidBridge.vibrate(40);
+          return;
+        } catch (e) {}
+      }
+      if ('vibrate' in navigator) {
+        try {
+          if (type === 'tap') navigator.vibrate(8);
+          else if (type === 'mastered') navigator.vibrate(15);
+          else if (type === 'review') navigator.vibrate([10, 30, 10]);
+          else if (type === 'undo') navigator.vibrate([20, 20, 20]);
+        } catch (e) {}
+      }
+    }
+
+    // Touch Drag Physics on Flashcard
+    const flashcardEl = document.getElementById('flashcard');
+    let startX = 0, startY = 0, currentX = 0, currentY = 0, isDragging = false;
+
+    flashcardEl.addEventListener('touchstart', (e) => {
+      if (e.target.closest('button, input, textarea, select')) return;
+      const touch = e.touches[0];
+      startX = touch.clientX;
+      startY = touch.clientY;
+      currentX = startX;
+      currentY = startY;
+      isDragging = true;
+      flashcardEl.classList.remove('card-transition');
+    }, { passive: true });
+
+    flashcardEl.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      const touch = e.touches[0];
+      currentX = touch.clientX;
+      currentY = touch.clientY;
+      const deltaX = currentX - startX;
+      const deltaY = currentY - startY;
+
+      const rotate = deltaX * 0.04;
+      flashcardEl.style.transform = `translate(${deltaX}px, ${deltaY * 0.25}px) rotate(${rotate}deg)`;
+      flashcardEl.style.opacity = Math.max(0.65, 1 - Math.abs(deltaX) / 380);
+    }, { passive: true });
+
+    flashcardEl.addEventListener('touchend', (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      flashcardEl.classList.add('card-transition');
+      const deltaX = currentX - startX;
+      const deltaY = currentY - startY;
+
+      if (Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
+        triggerHaptic('tap');
+        revealDefinition();
+        flashcardEl.style.transform = '';
+        flashcardEl.style.opacity = '';
+        return;
+      }
+
+      if (deltaX > 80) {
+        triggerHaptic('mastered');
+        flashcardEl.style.transform = 'translate(120vw, 0px) rotate(20deg)';
+        flashcardEl.style.opacity = '0';
+        setTimeout(() => {
+          flashcardEl.style.transform = '';
+          flashcardEl.style.opacity = '';
+          submitAnswer('MASTERED');
+        }, 200);
+      } else if (deltaX < -80) {
+        triggerHaptic('review');
+        flashcardEl.style.transform = 'translate(-120vw, 0px) rotate(-20deg)';
+        flashcardEl.style.opacity = '0';
+        setTimeout(() => {
+          flashcardEl.style.transform = '';
+          flashcardEl.style.opacity = '';
+          submitAnswer('STRUGGLING');
+        }, 200);
+      } else if (deltaY > 80) {
+        triggerHaptic('undo');
+        flashcardEl.style.transform = '';
+        flashcardEl.style.opacity = '';
+        document.getElementById('btn-undo').click();
+      } else {
+        flashcardEl.style.transform = '';
+        flashcardEl.style.opacity = '';
+      }
+    });
+
+    flashcardEl.addEventListener('click', (e) => {
+      if (!isDragging && !e.target.closest('button')) {
+        triggerHaptic('tap');
+        revealDefinition();
+      }
+    });
+
+    // Keyboard shortcuts
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'z') {
+        e.preventDefault();
+        triggerHaptic('undo');
+        document.getElementById('btn-undo').click();
+      } else if ((e.key === ' ' || e.key === 'Enter' || e.key === 'ArrowUp') && !isDefinitionRevealed && !viewReview.classList.contains('hidden') && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        triggerHaptic('tap');
+        revealDefinition();
+      } else if (e.key === 'ArrowRight' && !viewReview.classList.contains('hidden') && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+        triggerHaptic('mastered');
+        submitAnswer('MASTERED');
+      } else if (e.key === 'ArrowLeft' && !viewReview.classList.contains('hidden') && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+        triggerHaptic('review');
+        submitAnswer('STRUGGLING');
+      }
+    });
+
+    // Android Shortcut Deep Linking & Hash Routing
+    function handleRouteHash() {
+      if (window.location.hash === '#capture') {
+        setTimeout(() => {
+          if (newWordInput) {
+            newWordInput.focus();
+            newWordInput.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 150);
+      } else if (window.location.hash === '#review') {
+        setTab('review');
+      } else if (window.location.hash === '#lexicon') {
+        setTab('lexicon');
+      }
+    }
+    window.addEventListener('hashchange', handleRouteHash);
+    handleRouteHash();
+
+    // INITIAL RENDER
+    if (cachedCards.length === 0) cachedCards = [...DEFAULT_SEED_CARDS];
+    updateLexiconCounts();
+    scheduleSpacedReviewReminder();
+
+    const dueInitial = getDueCards(false);
+    if (dueInitial.length > 0) {
+      startReviewSession(false);
+    } else {
+      showCaughtUpView();
+    }
+
+    // Background sync
+    fetchSession();
+    fetchFullDeck();
+  </script>
+</body>
+</html>

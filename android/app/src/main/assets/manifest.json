@@ -1,0 +1,35 @@
+{
+  "name": "Axioma Lexis — Spaced Repetition",
+  "short_name": "Lexis",
+  "description": "Mobile-first, zero-friction spaced repetition vocabulary engine with active recall and humane 1-tier step-back spacing.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0d14",
+  "theme_color": "#0a0d14",
+  "orientation": "portrait-primary",
+  "categories": ["education", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "⚡ Quick Capture",
+      "short_name": "Capture",
+      "description": "Instantly capture and auto-hydrate a single word",
+      "url": "/#capture",
+      "icons": [{ "src": "/icon.svg", "sizes": "192x192" }]
+    },
+    {
+      "name": "🎯 Micro Review",
+      "short_name": "Review",
+      "description": "Launch straight into the 3-word micro-review batch",
+      "url": "/#review",
+      "icons": [{ "src": "/icon.svg", "sizes": "192x192" }]
+    }
+  ]
+}

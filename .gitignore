@@ -1,0 +1,41 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Android / Gradle Build Artefacts
+.gradle/
+build/
+app/build/
+android/.gradle/
+android/app/build/
+android/build/
+android/gradle/wrapper/gradle-8.4/
+android/gradle/wrapper/classes/
+android/gradle/wrapper/src/
+android/gradle/wrapper/*.zip
+local.properties
+*.apk
+*.aab
+
+# IDE & Editor
+.idea/
+.vscode/
+*.iml
+*.sublime-project
+*.sublime-workspace

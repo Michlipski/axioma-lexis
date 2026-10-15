@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Axioma Lexis Monogram (L) -->
+    <path
+        android:strokeColor="#6366f1"
+        android:strokeWidth="7"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M38,32 L38,76 L70,76" />
+    <path
+        android:fillColor="#10b981"
+        android:pathData="M70,36 A6,6 0 1,1 70,35.9 Z" />
+</vector>

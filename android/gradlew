@@ -1,0 +1,72 @@
+#!/bin/sh
+
+# Gradle start-up script for POSIX systems
+APP_BASE_NAME=`basename "$0"`
+# Locate directory containing this script regardless of working directory
+APP_HOME="$(cd "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
+
+warn () {
+    echo "$*"
+}
+
+die () {
+    echo
+    echo "$*" >&2
+    echo
+    exit 1
+}
+
+# Determine the Java command to use to start the JVM.
+if [ -n "$JAVA_HOME" ] && [ -x "$JAVA_HOME/bin/java" ]; then
+    JAVACMD="$JAVA_HOME/bin/java"
+elif which java >/dev/null 2>&1; then
+    JAVACMD="java"
+elif [ -x "/Applications/Android Studio.app/Contents/jbr/Contents/Home/bin/java" ]; then
+    export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
+    JAVACMD="$JAVA_HOME/bin/java"
+else
+    die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH."
+fi
+
+# Locate gradle wrapper jar or run gradle directly
+WRAPPER_DIR="$APP_HOME/gradle/wrapper"
+CLASSPATH="$WRAPPER_DIR/gradle-wrapper.jar"
+
+# 1. Check wrapper jar
+if [ -f "$CLASSPATH" ]; then
+    exec "$JAVACMD" "-Dorg.gradle.appname=$APP_BASE_NAME" -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
+fi
+
+# 2. Check local extracted gradle binary
+LOCAL_GRADLE="$WRAPPER_DIR/gradle-8.4/bin/gradle"
+if [ -x "$LOCAL_GRADLE" ]; then
+    exec "$LOCAL_GRADLE" "$@"
+fi
+
+# 3. Check system gradle
+if which gradle >/dev/null 2>&1; then
+    exec gradle "$@"
+fi
+
+# 4. Bootstrap: Download gradle-8.4-bin.zip
+echo "[gradlew] Downloading Gradle 8.4 binary distribution..."
+mkdir -p "$WRAPPER_DIR"
+ZIP_FILE="$WRAPPER_DIR/gradle-8.4-bin.zip"
+DIST_URL="https://services.gradle.org/distributions/gradle-8.4-bin.zip"
+
+if which curl >/dev/null 2>&1; then
+    curl -sSL -f -o "$ZIP_FILE" "$DIST_URL"
+elif which wget >/dev/null 2>&1; then
+    wget -q -O "$ZIP_FILE" "$DIST_URL"
+fi
+
+if [ -f "$ZIP_FILE" ]; then
+    unzip -q -o "$ZIP_FILE" -d "$WRAPPER_DIR"
+    rm -f "$ZIP_FILE"
+    if [ -x "$LOCAL_GRADLE" ]; then
+        chmod +x "$LOCAL_GRADLE"
+        exec "$LOCAL_GRADLE" "$@"
+    fi
+fi
+
+die "ERROR: Neither gradle wrapper jar nor gradle installation found."
